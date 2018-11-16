@@ -1,46 +1,17 @@
 const graphql = require("graphql");
 const _ = require("lodash");
+const Gift = require("../models/Gift");
+const Occasion = require("../models/Occasion");
+const TargetGroup = require("../models/TargetGroup");
 
 const {
   GraphQLObjectType,
   GraphQLString,
   GraphQLSchema,
   GraphQLID,
-  GraphQLList
+  GraphQLList,
+  GraphQLNonNull
 } = graphql;
-
-//dummy data
-let gifts = [
-  { name: "bag", category: "Fashion", id: "1", occasionId: "3", targetId: "3" },
-  { name: "cake", category: "Food", id: "2", occasionId: "2", targetId: "1" },
-  {
-    name: "ring",
-    category: "Jwelary",
-    id: "3",
-    occasionId: "1",
-    targetId: "2"
-  },
-  { name: "car", category: "Fashion", id: "1", occasionId: "3", targetId: "3" },
-  { name: "rose", category: "Food", id: "2", occasionId: "2", targetId: "2" },
-  {
-    name: "makeup-kit",
-    category: "Jwelary",
-    id: "3",
-    occasionId: "1",
-    targetId: "2"
-  }
-];
-
-let occasion = [
-  { name: "weeding", id: "1" },
-  { name: "birthday", id: "2" },
-  { name: "christmas", id: "3" }
-];
-let targetgroup = [
-  { name: "kids", id: "1" },
-  { name: "girls", id: "2" },
-  { name: "boys", id: "3" }
-];
 
 const GiftType = new GraphQLObjectType({
   name: "Gift",
@@ -56,10 +27,11 @@ const OccasionType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLID },
     name: { type: GraphQLString },
-    gift: {
+    gifts: {
       type: new GraphQLList(GiftType),
       resolve(parent, args) {
-        return _.filter(gifts, { occasionId: parent.id });
+        //return _.filter(gifts, { occasionId: parent.id });
+        return Gift.find({ occasionId: parent.id });
       }
     }
   })
@@ -70,10 +42,11 @@ const TargetgroupType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLID },
     name: { type: GraphQLString },
-    gift: {
+    gifts: {
       type: new GraphQLList(GiftType),
       resolve(parent, args) {
-        return _.filter(gifts, { targetId: parent.id });
+        //return _.filter(gifts, { targetId: parent.id });
+        return Gift.find({ targetId: parent.id });
       }
     }
   })
@@ -87,7 +60,8 @@ const RootQuery = new GraphQLObjectType({
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
         //code to get data from db
-        return _.find(gifts, { id: args.id });
+        //return _.find(gifts, { id: args.id });
+        return Gift.findById(args.id);
       }
     },
     occasion: {
@@ -95,7 +69,8 @@ const RootQuery = new GraphQLObjectType({
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
         //code to get data from db
-        return _.find(occasion, { id: args.id });
+        //return _.find(occasion, { id: args.id });
+        return Occasion.findById(args.id);
       }
     },
     targetgroup: {
@@ -103,18 +78,71 @@ const RootQuery = new GraphQLObjectType({
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
         //code to get data from db
-        return _.find(targetgroup, { id: args.id });
+        //return _.find(targetgroup, { id: args.id });
+        return TargetGroup.findById(args.id);
       }
     },
     gifts: {
       type: new GraphQLList(GiftType),
       resolve(parent, args) {
-        return gifts;
+        //return gifts;
+        return Gift.find({});
+      }
+    }
+  }
+});
+
+const Mutation = new GraphQLObjectType({
+  name: "Mutation",
+  fields: {
+    addGift: {
+      type: GiftType,
+      args: {
+        name: { type: new GraphQLNonNull(GraphQLString) },
+        category: { type: new GraphQLNonNull(GraphQLString) },
+        occasionId: { type: new GraphQLNonNull(GraphQLID) },
+        targetId: { type: new GraphQLNonNull(GraphQLID) }
+      },
+      resolve(parent, args) {
+        let gift = new Gift({
+          name: args.name,
+          category: args.category,
+          occasionId: args.occasionId,
+          targetId: args.targetId
+        });
+        return gift.save();
+      }
+    },
+
+    addOccasion: {
+      type: OccasionType,
+      args: {
+        name: { type: new GraphQLNonNull(GraphQLString) }
+      },
+      resolve(parent, args) {
+        let occasion = new Occasion({
+          name: args.name
+        });
+        return occasion.save();
+      }
+    },
+
+    addTargetgroup: {
+      type: TargetgroupType,
+      args: {
+        name: { type: new GraphQLNonNull(GraphQLString) }
+      },
+      resolve(parent, args) {
+        let targetgroup = new TargetGroup({
+          name: args.name
+        });
+        return targetgroup.save();
       }
     }
   }
 });
 
 module.exports = new GraphQLSchema({
-  query: RootQuery
+  query: RootQuery,
+  mutation: Mutation
 });
