@@ -1,0 +1,49 @@
+.navbar-container {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: transparent;
+
+  top: 0;
+  width: 100%;
+  position: fixed;
+}
+
+.navbar a {
+  float: left;
+
+  font-size: 17px;
+
+  color: black;
+  text-align: center;
+  margin: 0px 2vw;
+  text-decoration: none;
+}
+
+.float-center {
+  padding-top: 40px;
+}
+.float-right {
+  float: right;
+  margin-right: 40px;
+}
+.navbar .logo-img {
+  height: 95px;
+  width: 100px;
+}
+input[type="text"] {
+  float: left;
+  flex: 1;
+
+  margin-top: 35px;
+
+  margin-left: 3vw;
+  font-size: 17px;
+  outline: 0;
+  background-color: transparent;
+  border-width: 0 0 1px;
+  border-color: black;
+}
