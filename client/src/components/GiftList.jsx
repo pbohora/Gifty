@@ -3,14 +3,7 @@ import { gql } from "apollo-boost";
 import { graphql } from "react-apollo";
 import "../giftlist.css";
 
-import {
-  Card,
-  CardImg,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  Button
-} from "reactstrap";
+import { Card, CardImg, CardBody, CardTitle, CardSubtitle } from "reactstrap";
 
 const getGiftQuery = gql`
   {
