@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import BackgroundSlideshow from "react-background-slideshow";
 import Navbar from "./Navbar";
 import "../home.css";
+import home from "../home.jpg";
 
 class Home extends Component {
   render() {
