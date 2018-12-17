@@ -6,15 +6,16 @@ import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 class Navbar extends Component {
   state = {
     color: "transparent",
-    boxShadow: "",
-    borderbottom: ""
+    borderbottom: "",
+    opacity: ""
   };
 
   listenScrollEvent = e => {
-    window.scrollY > 200
+    window.scrollY > 50
       ? this.setState({
           color: "white",
-          borderbottom: "1px solid black"
+          borderbottom: "1px solid black",
+          opacity: "0.9"
         })
       : this.setState({
           color: "transparent",
@@ -32,13 +33,14 @@ class Navbar extends Component {
         style={{
           background: this.state.color,
           color: this.state.textcolor,
-          borderBottom: this.state.borderbottom
+          borderBottom: this.state.borderbottom,
+          opacity: this.state.opacity
         }}
-        className="navbar navbar-expand-lg fixed-top navbar-light navfont"
+        className="navbar navbar-expand-lg fixed-top navbar-light navfont stroke"
       >
-        <a className="navbar-brand" href="#">
+        <span className="navbar" href="#">
           <img className="logo-img" src={logo} />
-        </a>
+        </span>
         <button
           className="navbar-toggler"
           type="button"
@@ -73,7 +75,7 @@ class Navbar extends Component {
                 class=" nav-link dropdown-toggle"
                 data-toggle="dropdown"
               >
-                Occasion <b class="caret" />
+                Occasions
               </a>
               <ul class="dropdown-menu multi-column columns-2">
                 <div class="row">

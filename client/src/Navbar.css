@@ -1,14 +1,18 @@
 nav a {
-  margin-left: 35px;
+  margin-left: 15px;
 }
 
 .logo-img {
-  height: 40px;
-  width: 90px;
   margin-right: 20px;
   padding-right: 25px;
   border-right: 2px solid black;
+  background: transparent;
+  height: 2em;
+  width: 5em;
+
+  margin: 0px;
 }
+
 input[type="search"] {
   font-size: 17px;
   outline: 0;
@@ -20,6 +24,30 @@ input[type="search"] {
 .navfont {
   font-family: "Fjalla One", sans-serif;
 }
+nav ul li a,
+nav ul li a:after,
+nav ul li a:before {
+  transition: all 0.5s;
+}
+
+nav.stroke ul li a {
+  position: relative;
+}
+nav.stroke a:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0%;
+  content: ".";
+  color: transparent;
+  background: black;
+  height: 2px;
+}
+nav.stroke a:hover:after {
+  width: 100%;
+}
 .dropdown-menu {
   min-width: 200px;
 }
@@ -30,7 +58,7 @@ input[type="search"] {
   text-decoration: none;
 }
 .multi-column li a {
-  padding: 15px 15px;
+  padding: 15px 30px;
   font-weight: 100px;
 }
 .multi-column-dropdown {
@@ -47,14 +75,16 @@ input[type="search"] {
 }
 .account-dropdown {
   height: 150px;
+  padding-top: 1002px;
 }
 .account-dropdown li {
   margin-bottom: 20px;
 }
+.account-dropdown li a {
+  color: black;
+}
 .multi-column-dropdown li a:hover {
   text-decoration: none;
-  color: #262626;
-  background-color: #999;
 }
 
 @media (max-width: 767px) {
@@ -69,4 +99,9 @@ input[type="search"] {
 }
 .dropdown-toggle::after {
   display: none !important;
+  transition: all 0.5s;
+  width: 100%;
+}
+.dropdown:hover .dropdown-menu {
+  display: block;
 }

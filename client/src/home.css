@@ -1,22 +1,32 @@
 .bg {
-  background: url(home.jpg);
   height: 100vh;
+
   background-repeat: no-repeat;
   background-size: cover;
-
+  overflow: hidden;
   background-position: center;
-  background-attachment: fixed;
+}
+
+.bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: linear-gradient(to bottom right, #88d5ef, #002f4b);
+  opacity: 0.6;
 }
 .home-body {
-  padding-top: 30vh;
-
-  padding-left: 10vh;
-  padding-right: 10vh;
+  top: 0;
   color: white;
-
+  padding: 10vh;
+  position: absolute;
+  margin-top: 30vh;
   text-align: center;
   font-size: 5vw;
 }
+
 .arrow-down {
   width: 100%;
   position: absolute;
@@ -63,30 +73,10 @@
 
 .arrow-down button {
   margin-top: 195px;
-  background-color: rgb(120, 164, 231);
+  background-color: #34b3a0;
   padding: 15px;
   border-radius: 30px;
   color: white;
   font-size: 20px;
   border: none;
-}
-
-.darken-pseudo {
-  position: relative;
-}
-
-.darken-pseudo:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: block;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.darken-text {
-  z-index: 1;
-  position: relative;
 }

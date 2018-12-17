@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { gql } from "apollo-boost";
 import { graphql } from "react-apollo";
 import "../giftlist.css";
+import homes from "../home.jpg";
 
 import {
   Card,
@@ -31,20 +32,20 @@ class GiftList extends Component {
           <Card
             key={gift.id}
             style={{
-              margin: "70px",
+              margin: "40px 10px",
               border: "1px solid #f2f2f2",
-              width: "35vw",
-              height: "30vw"
+              width: "26rem",
+              height: "31rem"
             }}
           >
             <CardImg
-              style={{ width: "35vw", height: "30vw" }}
-              src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180"
+              style={{ width: "26rem", height: "25rem" }}
+              src={homes}
               alt="Card image cap"
             />
             <CardBody>
               <CardTitle>{gift.name}</CardTitle>
-              <CardSubtitle>Price: {gift.id}</CardSubtitle>
+              <p>Price: {gift.id}</p>
             </CardBody>
           </Card>
         );
