@@ -21,8 +21,36 @@ const getGiftQuery = gql`
     }
   }
 `;
-
+const styles = {
+  transition: "all 1s ease-out"
+};
 class GiftList extends Component {
+  state = {
+    opacity: 1,
+    scale: 1,
+    gifts: []
+  };
+
+  componentWillMount = () => {
+    const data = this.props.data;
+    console.log(this.props);
+    if (!data.loading) {
+      let gifts = [...this.state.gifts, data.gifts];
+      this.setState({ gifts: gifts });
+    }
+  };
+  onScale = id => {
+    this.setState({
+      scale: this.state.scale > 1 ? 1 : 1.3
+    });
+  };
+  offScale = e => {
+    this.setState({
+      scale: 1,
+      opacity: 1
+    });
+  };
+
   displayGift() {
     const data = this.props.data;
     //console.log(data.gifts);
@@ -57,5 +85,4 @@ class GiftList extends Component {
     return <div className="gift-container">{this.displayGift()}</div>;
   }
 }
-
 export default graphql(getGiftQuery)(GiftList);

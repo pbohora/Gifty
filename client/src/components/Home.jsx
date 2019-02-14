@@ -9,7 +9,7 @@ class Home extends Component {
       <div>
         <div className="bg">
           <div className="v-cover">
-            <video src={home} autoPlay="true" loop="true" />
+            <video src={home} autoPlay={true} loop={true} />
           </div>
           <div className="home-body">
             <p className="item">Now sending Gift for beloved ones is easy</p>
@@ -18,7 +18,6 @@ class Home extends Component {
             <button>New Arrivals</button>
           </div>
         </div>
-        <GiftList />
       </div>
     );
   }

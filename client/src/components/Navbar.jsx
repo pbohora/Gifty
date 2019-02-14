@@ -7,7 +7,8 @@ class Navbar extends Component {
   state = {
     color: "transparent",
     borderbottom: "",
-    opacity: ""
+    opacity: "",
+    boxShadow: ""
   };
 
   listenScrollEvent = e => {
@@ -15,7 +16,9 @@ class Navbar extends Component {
       ? this.setState({
           color: "white",
           borderbottom: "1px solid black",
-          opacity: "0.9"
+          opacity: "0.9",
+          textcolor: "red",
+          boxShadow: "0px 9px 5px 0px rgba(0,0,0,0.75)"
         })
       : this.setState({
           color: "transparent",
@@ -69,18 +72,18 @@ class Navbar extends Component {
                 Friends
               </a>
             </li>
-            <li class="dropdown active">
+            <li className="dropdown active">
               <a
                 href="#"
-                class=" nav-link dropdown-toggle"
+                className=" nav-link dropdown-toggle"
                 data-toggle="dropdown"
               >
                 Occasions
               </a>
-              <ul class="dropdown-menu multi-column columns-2">
-                <div class="row">
-                  <div class="col-sm-6">
-                    <ul class="multi-column-dropdown">
+              <ul className="dropdown-menu multi-column columns-2">
+                <div className="row">
+                  <div className="col-sm-6">
+                    <ul className="multi-column-dropdown">
                       <li>
                         <a href="#">Christmas</a>
                       </li>
@@ -90,14 +93,14 @@ class Navbar extends Component {
                       <li>
                         <a href="#">Valentine's Day</a>
                       </li>
-                      <li class="divider" />
+                      <li className="divider" />
                       <li>
                         <a href="#">Special Day</a>
                       </li>
                     </ul>
                   </div>
-                  <div class="col-sm-6">
-                    <ul class="multi-column-dropdown">
+                  <div className="col-sm-6">
+                    <ul className="multi-column-dropdown">
                       <li>
                         <a href="#">Anniversary</a>
                       </li>
@@ -107,11 +110,11 @@ class Navbar extends Component {
                       <li>
                         <a href="#">Weeding</a>
                       </li>
-                      <li class="divider" />
+                      <li className="divider" />
                       <li>
                         <a href="#">Get Well Soon</a>
                       </li>
-                      <li class="divider" />
+                      <li className="divider" />
                       <li>
                         <a href="#">Others</a>
                       </li>
@@ -132,15 +135,15 @@ class Navbar extends Component {
                 My cart
               </a>
             </li>
-            <li class="dropdown active">
+            <li className="dropdown active">
               <a
                 href="#"
-                class=" nav-link dropdown-toggle"
+                className=" nav-link dropdown-toggle"
                 data-toggle="dropdown"
               >
-                My Account <b class="caret" />
+                My Account <b className="caret" />
               </a>
-              <ul class="dropdown-menu account-dropdown">
+              <ul className="dropdown-menu account-dropdown">
                 <li>
                   <a href="#">Sign In</a>
                 </li>
