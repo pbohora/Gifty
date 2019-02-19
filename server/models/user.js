@@ -1,5 +1,7 @@
 const mongoose=require('mongoose');
 const Joi=require('joi')
+const jwt= require('jsonwebtoken')
+require('dotenv').config()
 
 const userSchema=new mongoose.Schema({
     username: {
@@ -12,15 +14,12 @@ const userSchema=new mongoose.Schema({
       email: {
           type: String,
           required: true,
-          minlength: 5,
-          maxlength: 255,
           unique: true
         },
         password: {
           type: String,
           required: true,
-          minlength: 5,
-          maxlength: 1024
+          minlength: 8
         },
         isAdmin: {
           type: Boolean,
@@ -29,13 +28,14 @@ const userSchema=new mongoose.Schema({
 })
 
 userSchema.methods.token=function () {
-    const token =jwt.sign({_id: this._id,isAdmin: this.isAdmin, username : this.username},process.env.TOKEN_PASS);
-}
+    const token =jwt.sign({_id: this._id,isAdmin: this.isAdmin, username : this.username},'dhiraj');
+    return token;
+  }
 
 function validationUser(body) {
   
 const schema={
-  username : Joi.string().max(50).min(3).required(),
+  username : Joi.string().max(50).min(5).required(),
   email : Joi.string().required().email(),
   password : Joi.string().min(8)
 }
